@@ -11,6 +11,9 @@ void Shrink(char str[]);
 void RemoveSpaces(char str[]);
 void isPalindrome(char str[]);
 
+void Capitalize2(char str[]);
+void Shrink2(char str[]);
+
 #define TAB "\t"
 
 void main()
@@ -20,8 +23,9 @@ void main()
 	//char str[] = "hello";
 	//cout << str << endl;
 	//cout << sizeof(str) << endl;
-	const int n = 20;
+	const int n = 200;
 	char str[n];
+	
 	cout << "¬ведите строку: ";
 	//cin >> str;
 	input_line(str, n);
@@ -35,7 +39,6 @@ void main()
 	cout << "преобразует строку в нижний регистр: " << endl;
 	LowerCase(str);
 	cout << TAB << str << endl;
-
 
 	cout << "”дал€ем лишние пробелы: " << endl;
 	Shrink(str);
@@ -72,24 +75,24 @@ void UpperCase(char str[])
 {
 	for (int i = 0; str[i]; i++)
 	{
-		if (str[i] > 32) str[i] -= 32;
+		if (str[i] >= 'a' && str[i] <= 'z' || str[i] >= 'а' && str[i] <= '€') str[i] -= 32;
 	}
 }
 void LowerCase(char str[])
 {
 	for (int i = 0; str[i]; i++)
 	{
-		if (str[i] != 32) str[i] += 32;
+		if (str[i] >= 'A' && str[i] <= 'Z' || str[i] >= 'ј' && str[i] <= 'я') str[i] += 32;
 	}
 }
 void Capitalize(char str[])
 {
-	if (str[0] > 32) str[0] -= 32;
+	if (str[0] >= 'a' && str[0] <= 'z' || str[0] >= 'а' && str[0] <= '€') str[0] -= 32;
 	for (int i = 1; str[i]; i++)
 	{
-		if (str[i - 1] == 32)
+		if (str[i - 1] == ' ')
 		{
-			if (str[i] > 32)
+			if (str[i] > ' ')
 			{
 				str[i] -= 32;
 			}
@@ -101,10 +104,10 @@ void Shrink(char str[])
 	int buffer = 0;
 	for (int i = 0; str[i]; i++)
 	{
-		if ((str[i - 1] == 32) && (str[i] == 32))
+		if ((str[i - 1] == ' ') && (str[i] == ' '))
 		{
-			buffer = i;
-			while (str[buffer] == 32) buffer++; // поиск не 0
+buffer = i;
+while (str[buffer] == ' ') buffer++; // поиск не 0
 		}
 		if (buffer != 0)
 		{
@@ -119,13 +122,13 @@ void RemoveSpaces(char str[])
 	int buffer = 0;
 	for (int i = 0; str[i]; i++)
 	{
-		if ((str[i] == 32) && (str[i] < 1))
+		if ((str[i] == ' ') && (str[i] < 1))
 		{
 			buffer = i;
-			while (str[buffer] == 32) buffer++; // поиск не 0
+			while (str[buffer] == ' ') buffer++; // поиск не "пробел"
 		}
 		if (str[buffer] != 0)str[i] = str[buffer];
-		if (str[i] == 32) i--;
+		if (str[i] == ' ') i--;
 		buffer++;
 		if (str[buffer] == '\0') str[i + 1] = '\0';
 	}
@@ -141,7 +144,7 @@ void isPalindrome(char str[])
 		buffer--;
 	}
 	if (i == proverka) cout << TAB << "it IS palindrom" << endl;
-	else cout << TAB << "It NOT" << endl;
+	else cout << TAB << "It's NOT" << endl;
 }
 //void Shrink(char str[])
 //{
@@ -182,3 +185,29 @@ void isPalindrome(char str[])
 //		}
 //	}
 //}
+void Capitalize2(char str[])
+{
+
+	if (str[0] >= 'a' && str[0] <= 'z' || str[0] >= 'а' && str[0] <= '€') str[0] -= 32;
+	for (int i = 1; str[i]; i++)
+	{
+
+		if (
+			(str[i] >= 'a' && str[i] <= 'z' || str[i] >= 'а' && str[i] <= '€') &&
+			str[i - 1] == ' ')
+		{
+			str[i] -= 32;
+		}
+	}
+}
+void Shrink2(char str[])
+{
+	int buffer = 0;
+	for (int i = 0; str[i]; i++)
+	{
+		while (str[i] == ' ' && str[i + 1] == ' ')
+		{
+				for (int j = i + 1; str[i]; i++)	str[i] = str[j + 1];
+		}
+	}
+}
