@@ -36,9 +36,6 @@ void main()
 	LowerCase(str);
 	cout << TAB << str << endl;
 
-	cout << "Каждое Слово С Большой Буквы: " << endl;
-	Capitalize(str);
-	cout << TAB << str << endl;
 
 	cout << "Удаляем лишние пробелы: " << endl;
 	Shrink(str);
@@ -51,6 +48,9 @@ void main()
 	cout << "Палиндром?: " << endl;
 	isPalindrome(str);
 	
+	cout << "Каждое Слово С Большой Буквы: " << endl;
+	Capitalize(str);
+	cout << TAB << str << endl;
 	
 	
 }
@@ -72,7 +72,7 @@ void UpperCase(char str[])
 {
 	for (int i = 0; str[i]; i++)
 	{
-		if (str[i] != 32) str[i] -= 32;
+		if (str[i] > 32) str[i] -= 32;
 	}
 }
 void LowerCase(char str[])
@@ -84,12 +84,12 @@ void LowerCase(char str[])
 }
 void Capitalize(char str[])
 {
-	for (int i = 0; str[i]; i++)
+	if (str[0] > 32) str[0] -= 32;
+	for (int i = 1; str[i]; i++)
 	{
-		if (i == 0) str[i] -= 32;
 		if (str[i - 1] == 32)
 		{
-			if (str[i] != 32)
+			if (str[i] > 32)
 			{
 				str[i] -= 32;
 			}
@@ -98,39 +98,36 @@ void Capitalize(char str[])
 }
 void Shrink(char str[])
 {
+	int buffer = 0;
 	for (int i = 0; str[i]; i++)
 	{
-		if (str[i - 1] == 32)
+		if ((str[i - 1] == 32) && (str[i] == 32))
 		{
-			if (str[i] == 32)
-			{
-				int buffer = i;
-				while (str[buffer] == 32) buffer++;
-				do {
-					str[i] = str[buffer];
-					i++;
-					buffer++;
-				} while (str[buffer] != '\0');
-				str[i] = '\0';
-			}
+			buffer = i;
+			while (str[buffer] == 32) buffer++; // поиск не 0
 		}
+		if (buffer != 0)
+		{
+			str[i] = str[buffer];
+			buffer++;
+		}
+		if (str[buffer] == '\0') str[i + 1] = '\0';
 	}
 }
 void RemoveSpaces(char str[])
 {
+	int buffer = 0;
 	for (int i = 0; str[i]; i++)
-	{		
-		if (str[i] == 32)
+	{
+		if ((str[i] == 32) && (str[i] < 1))
 		{
-			int buffer = i;
-			while (str[buffer] == 32) buffer++;
-			do {
-				str[i] = str[buffer];
-				i++;
-				buffer++;
-			} while (str[buffer] != '\0');
-			str[i] = '\0';
+			buffer = i;
+			while (str[buffer] == 32) buffer++; // поиск не 0
 		}
+		if (str[buffer] != 0)str[i] = str[buffer];
+		if (str[i] == 32) i--;
+		buffer++;
+		if (str[buffer] == '\0') str[i + 1] = '\0';
 	}
 }
 void isPalindrome(char str[])
@@ -146,3 +143,42 @@ void isPalindrome(char str[])
 	if (i == proverka) cout << TAB << "it IS palindrom" << endl;
 	else cout << TAB << "It NOT" << endl;
 }
+//void Shrink(char str[])
+//{
+//	for (int i = 0; str[i]; i++)
+//	{
+//		if (str[i - 1] == 32)
+//		{
+//			if (str[i] == 32)
+//			{
+//				int buffer = i;
+//				while (str[buffer] == 32) buffer++;
+//				do {
+//					str[i] = str[buffer];
+//					i++;
+//					buffer++;
+//				} while (str[buffer] != '\0');
+//				str[i] = '\0';
+//			}
+//		}
+//	}
+//}
+//void RemoveSpaces(char str[]) //не работает с несколькими пробеллами
+//{
+//	int buffer = 0;
+//	for (int i = 0; str[i]; i++)
+//	{		
+//		if (str[i] == 32)
+//		{
+//			if (buffer == 0 ) buffer = i;
+//			while (str[buffer] == 32) buffer++;
+//			do {
+//				str[i] = str[buffer];
+//				i++;
+//				buffer++;
+//			} while ((str[i] != 32) && (str[buffer] != '\0'));
+//			if(str[buffer] == '\0') str[i] = '\0';
+//			else i -= 2;
+//		}
+//	}
+//}
