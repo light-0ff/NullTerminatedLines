@@ -9,10 +9,13 @@ void LowerCase(char str[]);
 void Capitalize(char str[]);
 void Shrink(char str[]);
 void RemoveSpaces(char str[]);
-void isPalindrome(char str[]);
+bool isPalindrom(char str[]);
 
 void Capitalize2(char str[]);
 void Shrink2(char str[]);
+bool isPalindrom2(char str[]);
+bool isNomber(char str[]);
+int StrToInt(char str[]);
 
 #define TAB "\t"
 
@@ -32,29 +35,34 @@ void main()
 	cout << TAB << str << endl;
 	cout << StrLen(str) << endl; //проверка размера
 	
-	cout << "преобразует строку в верхний регистр: " << endl;
-	UpperCase(str);
-	cout << TAB << str << endl;
+	//cout << "преобразует строку в верхний регистр: " << endl;
+	//UpperCase(str);
+	//cout << TAB << str << endl;
 
-	cout << "преобразует строку в нижний регистр: " << endl;
-	LowerCase(str);
-	cout << TAB << str << endl;
+	//cout << "преобразует строку в нижний регистр: " << endl;
+	//LowerCase(str);
+	//cout << TAB << str << endl;
 
-	cout << "Удаляем лишние пробелы: " << endl;
-	Shrink(str);
-	cout << TAB << str << endl;
+	//cout << "Удаляем лишние пробелы: " << endl;
+	//Shrink(str);
+	//cout << TAB << str << endl;
 
-	cout << "Без пробелов: " << endl;
-	RemoveSpaces(str);
-	cout << TAB << str << endl;
+	//cout << "Каждое Слово С Большой Буквы: " << endl;
+	//Capitalize(str);
+	//cout << TAB << str << endl;
+
+	//cout << "Без пробелов: " << endl;
+	//RemoveSpaces(str);
+	//cout << TAB << str << endl;
+	////////////////////////////
+	//cout << "Палиндром?: " << endl;
+	//bool palindrom = isPalindrome(str);
+	//if (palindrom) cout << TAB << "it IS palindrom" << endl;
+	//else cout << TAB << "It's NOT" << endl;
+	////////////////////////////
 	
-	cout << "Палиндром?: " << endl;
-	isPalindrome(str);
-	
-	cout << "Каждое Слово С Большой Буквы: " << endl;
-	Capitalize(str);
-	cout << TAB << str << endl;
-	
+	int num = StrToInt(str);
+	cout << num;
 	
 }
 
@@ -106,8 +114,8 @@ void Shrink(char str[])
 	{
 		if ((str[i - 1] == ' ') && (str[i] == ' '))
 		{
-buffer = i;
-while (str[buffer] == ' ') buffer++; // поиск не 0
+			buffer = i;
+			while (str[buffer] == ' ') buffer++; // поиск не 0
 		}
 		if (buffer != 0)
 		{
@@ -133,18 +141,22 @@ void RemoveSpaces(char str[])
 		if (str[buffer] == '\0') str[i + 1] = '\0';
 	}
 }
-void isPalindrome(char str[])
+bool isPalindrom(char str[])
 {
 	int buffer = StrLen(str);
+	char copy[200];
+	for (int i = 0; i <= buffer; i++) copy[i] = str[i];
+	RemoveSpaces(copy); //без пробелов
+	LowerCase(copy); //все с маленькой б
 	int i = 0;
 	int proverka = 0;
-	for (; str[i]; i++)
+	for (; copy[i]; i++)
 	{
-		if (str[i] == str[buffer - 1]) proverka++;
+		if (copy[i] == copy[buffer - 1]) proverka++;
 		buffer--;
 	}
-	if (i == proverka) cout << TAB << "it IS palindrom" << endl;
-	else cout << TAB << "It's NOT" << endl;
+	if (i == proverka) return true;
+	else return false;
 }
 //void Shrink(char str[])
 //{
@@ -210,4 +222,53 @@ void Shrink2(char str[])
 				for (int j = i + 1; str[i]; i++)	str[i] = str[j + 1];
 		}
 	}
+}
+bool isPalindrom2(char str[])
+{
+	//int size = StrLen(str);
+	//char* buffer = new char[size + 1] {};
+	//for (int i = 0; i < size; i++)buffer[i] = str[i]; // заполняем буффер
+	//LowerCase(buffer);
+	//RemoveSpaces(buffer); //без пробелов
+	//size = StrLen(buffer);
+	//for (int i = 0; i < size / 2; i++)
+	//{
+	//	if (buffer[i] != buffer[size - 1 - i]) return false;
+	//}
+	//return true;
+	int size = StrLen(str);
+	for (int i = 0; i < size / 2; i++)
+	{
+		if (str[i] == ' ')i++; size++;
+		if (str[size - 1 - i] == ' ')size--;
+		if (str[i] != str[size - 1 - i])
+		{
+			if (str[i] + 32 != str[size - 1 - i] && str[i] != str[size - 1 - i])return false;
+		}
+	}
+	return true;
+}
+bool isNomber(char str[]) //проверяет по строчке
+{
+	//3848
+	for (int i = 0; str[i]; i++)
+	{
+		if (!(str[i] >= '0'&&str[i] <= '9')) return false;
+	}
+	return true;
+}
+int StrToInt(char str[])
+{
+	int num = 0; 
+	
+	if (isNomber(str))
+	{
+		for (int i = 0; str[i]; i++) 
+		{
+			num *= 10;
+			num += str[i] - 48;
+		}
+	}
+	
+	return num;
 }
