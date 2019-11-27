@@ -16,6 +16,9 @@ void Shrink2(char str[]);
 bool isPalindrom2(char str[]);
 bool isNomber(char str[]);
 int StrToInt(char str[]);
+bool isBin(char str[]);
+int BinToDec(char str[]);
+
 
 #define TAB "\t"
 
@@ -61,8 +64,13 @@ void main()
 	//else cout << TAB << "It's NOT" << endl;
 	////////////////////////////
 	
-	int num = StrToInt(str);
-	cout << num;
+	cout << "Переводим строчку в int: " << endl;
+	int into = StrToInt(str);
+	cout << into << endl;
+
+	cout << "Переводим строчку в десятичное: " << endl;
+	int bin = BinToDec(str);
+	cout << bin << endl;
 	
 }
 
@@ -248,9 +256,8 @@ bool isPalindrom2(char str[])
 	}
 	return true;
 }
-bool isNomber(char str[]) //проверяет по строчке
+bool isNomber(char str[]) //проверяет является ли строчка числовой
 {
-	//3848
 	for (int i = 0; str[i]; i++)
 	{
 		if (!(str[i] >= '0'&&str[i] <= '9')) return false;
@@ -260,7 +267,6 @@ bool isNomber(char str[]) //проверяет по строчке
 int StrToInt(char str[])
 {
 	int num = 0; 
-	
 	if (isNomber(str))
 	{
 		for (int i = 0; str[i]; i++) 
@@ -269,6 +275,36 @@ int StrToInt(char str[])
 			num += str[i] - 48;
 		}
 	}
-	
+
 	return num;
 }
+bool isBin(char str[]) 
+{
+	for (int i = 0; str[i]; i++)
+	{
+		if (!(str[i] == '0' || str[i] == '1')) return false;
+	}
+	return true;
+}
+int BinToDec(char str[]) // не работает с буквами
+{
+	int num = 0;
+	if (isBin(str))
+	{
+		for (int i = 0; i < StrLen(str); i++)
+		{
+			if (str[i] == '1')
+			{
+				int stepen = 2;
+				for (int j = 1; j < StrLen(str) - i; j++)
+				{
+					stepen *= 2;
+				}
+				num += stepen;
+			}
+		}
+		num /= 2;
+	}
+	return num;
+}
+
