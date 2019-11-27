@@ -64,13 +64,14 @@ void main()
 	//else cout << TAB << "It's NOT" << endl;
 	////////////////////////////
 	
-	cout << "Переводим строчку в int: " << endl;
-	int into = StrToInt(str);
-	cout << into << endl;
+	//cout << "Переводим строчку в int: " << endl;
+	//int into = StrToInt(str);
+	//cout << into << endl;
 
 	cout << "Переводим строчку в десятичное: " << endl;
-	int bin = BinToDec(str);
-	cout << bin << endl;
+	cout << BinToDec(str);
+	/*int bin = BinToDec(str);
+	cout << bin << endl;*/
 	
 }
 
@@ -286,25 +287,31 @@ bool isBin(char str[])
 	}
 	return true;
 }
-int BinToDec(char str[]) // не работает с буквами
+int BinToDec(char str[]) // не работает с буквами и пробелами
 {
 	int num = 0;
-	if (isBin(str))
+	int pow = 1;
+	///*if (isBin(str))
+	//{*/
+	//	/*for (int i = 0; i < StrLen(str); i++)
+	//	{
+	//		if (str[i] == '1')
+	//		{
+	//			int stepen = 2;
+	//			for (int j = 1; j < StrLen(str) - i; j++)
+	//			{
+	//				stepen *= 2;
+	//			}
+	//			num += stepen;
+	//		}
+	//	}
+	//	num /= 2;*/
+	//}
+	for (int i = StrLen(str) - 1; i >= 0; i--, pow *= 2)
 	{
-		for (int i = 0; i < StrLen(str); i++)
-		{
-			if (str[i] == '1')
-			{
-				int stepen = 2;
-				for (int j = 1; j < StrLen(str) - i; j++)
-				{
-					stepen *= 2;
-				}
-				num += stepen;
-			}
-		}
-		num /= 2;
+		if(str[i] == '1')num += pow;
 	}
+		
 	return num;
 }
 
