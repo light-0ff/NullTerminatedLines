@@ -18,7 +18,8 @@ bool isNomber(char str[]);
 int StrToInt(char str[]);
 bool isBin(char str[]);
 int BinToDec(char str[]);
-
+bool isHex(char str[]);
+int HexToDec(char str[]);
 
 #define TAB "\t"
 
@@ -68,10 +69,14 @@ void main()
 	//int into = StrToInt(str);
 	//cout << into << endl;
 
-	cout << "Переводим строчку в десятичное: " << endl;
-	cout << BinToDec(str);
-	/*int bin = BinToDec(str);
-	cout << bin << endl;*/
+	//cout << "Переводим строчку в десятичное: " << endl;
+	//int bin = BinToDec(str);
+	//cout << bin << endl;
+
+	//cout << isHex(str) << endl;
+	cout << "Переводим строчку в 16ричное: " << endl;
+	int hex = HexToDec(str);
+	cout << hex << endl;
 	
 }
 
@@ -291,8 +296,8 @@ int BinToDec(char str[]) // не работает с буквами и пробелами
 {
 	int num = 0;
 	int pow = 1;
-	///*if (isBin(str))
-	//{*/
+	if (isBin(str))
+	{
 	//	/*for (int i = 0; i < StrLen(str); i++)
 	//	{
 	//		if (str[i] == '1')
@@ -305,13 +310,44 @@ int BinToDec(char str[]) // не работает с буквами и пробелами
 	//			num += stepen;
 	//		}
 	//	}
-	//	num /= 2;*/
-	//}
-	for (int i = StrLen(str) - 1; i >= 0; i--, pow *= 2)
-	{
-		if(str[i] == '1')num += pow;
+	//	num /= 2;
+		for (int i = StrLen(str) - 1; i >= 0; i--, pow *= 2)
+		{
+			if (str[i] == '1')num += pow;
+		}
 	}
 		
 	return num;
 }
-
+bool isHex(char str[])
+{
+	for (int i = 0; str[i]; i++)
+	{
+		if (!(str[i] >= '0' && str[i] <= '9' ||
+			  str[i] >= 'A' && str[i] <= 'F' ||
+			  str[i] >= 'a' && str[i] <= 'f')) return false;
+	}
+	return true;
+}
+int HexToDec(char str[])
+{
+	int num = 0;
+	int pow = 1;
+	int otvet = 0;
+	if (isHex(str))
+	{
+		for (int i = StrLen(str) - 1; i >= 0; i--, pow *= 16)
+		{
+			if (str[i] >= '0' && str[i] <= '9') num = str[i] - 48;
+			else if (str[i] >= 'A' && str[i] <= 'F') num = str[i] - 55;
+			else num = str[i] - 87;
+			int buffer = num;
+			if (pow != 1) for (int j = 0; j < pow - 1; j++)
+			{
+				num += buffer;
+			}
+			otvet += num;
+		}
+	}
+	return otvet;
+}
