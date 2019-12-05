@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NumericSystems", "NumericSy
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project1StandartStrFunctioms", "Project1StandartStrFunctioms\Project1StandartStrFunctioms.vcxproj", "{1AA34826-2C5A-448E-8001-3DA14204C75F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Files", "Files\Files.vcxproj", "{009700C8-E85B-4BAF-A7B5-9912B7120D26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{1AA34826-2C5A-448E-8001-3DA14204C75F}.Release|x64.Build.0 = Release|x64
 		{1AA34826-2C5A-448E-8001-3DA14204C75F}.Release|x86.ActiveCfg = Release|Win32
 		{1AA34826-2C5A-448E-8001-3DA14204C75F}.Release|x86.Build.0 = Release|Win32
+		{009700C8-E85B-4BAF-A7B5-9912B7120D26}.Debug|x64.ActiveCfg = Debug|x64
+		{009700C8-E85B-4BAF-A7B5-9912B7120D26}.Debug|x64.Build.0 = Debug|x64
+		{009700C8-E85B-4BAF-A7B5-9912B7120D26}.Debug|x86.ActiveCfg = Debug|Win32
+		{009700C8-E85B-4BAF-A7B5-9912B7120D26}.Debug|x86.Build.0 = Debug|Win32
+		{009700C8-E85B-4BAF-A7B5-9912B7120D26}.Release|x64.ActiveCfg = Release|x64
+		{009700C8-E85B-4BAF-A7B5-9912B7120D26}.Release|x64.Build.0 = Release|x64
+		{009700C8-E85B-4BAF-A7B5-9912B7120D26}.Release|x86.ActiveCfg = Release|Win32
+		{009700C8-E85B-4BAF-A7B5-9912B7120D26}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
