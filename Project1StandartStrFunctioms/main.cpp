@@ -35,18 +35,13 @@ void main()
 	for (int i = 0; i < sizeof(words) / sizeof(const char*); i++)
 	{
 		for (int j = i + 1; j < sizeof(words) / sizeof(const char*); j++)
-		{
-			// ето не строка
-			//запомнит прошлую строку
-			if (words[j] == '\0')
+		{			
+			if (words[i] < words[j])
 			{
-				if (words[i] < words[j])
-				{
-					const char* buffer = words[i];
-					words[i] = words[j];
-					words[j] = buffer;
-				}
-			}
+				const char* buffer = words[i];
+				words[i] = words[j];
+				words[j] = buffer;
+			}			
 		}
 	}
 	for (int i = 0; i < sizeof(words) / sizeof(const char*); i++)
