@@ -47,9 +47,14 @@ void main()
 	//создать 2 буффера
 		//один для мак адресов, другой для IP
 	std::ifstream fin;
-	fin.open("list.txt");
+	//fin.open("list.txt");
 
 	const int n = 256;
+	char source_name[n] = {};
+	std::cout << "Введите название соуса: "; std::cin.getline(source_name, n);
+	if (!strstr(source_name, ".txt"))strcat(source_name, ".txt"); // для работы с тхт файлами
+	fin.open(source_name);
+
 	char mac_buffer[n] = {};
 	char ip_buffer[n] = {};
 
