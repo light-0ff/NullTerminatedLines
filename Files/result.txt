@@ -1,0 +1,71 @@
+host 404-1
+{
+	hardware ethernet	00:11:22:b4:c2:be;
+	fixed-address		192.168.100.21;
+}
+
+host 404-2
+{
+	hardware ethernet	00:11:22:be:b8:8e;
+	fixed-address		192.168.100.22;
+}
+
+host 404-3
+{
+	hardware ethernet	00:11:22:b5:e9:9b;
+	fixed-address		192.168.100.23;
+}
+
+host 404-4
+{
+	hardware ethernet	00:11:22:b4:b2:ed;
+	fixed-address		192.168.100.24;
+}
+
+#host 404-5
+#{
+#	hardware ethernet	00:11:22:bd:4f:51;
+#	fixed-address		192.168.100.25;
+#}
+
+host 404-6
+{
+	hardware ethernet	00:11:22:dc:52:80;
+	fixed-address		192.168.100.26;
+}
+
+host 404-7
+{
+	hardware ethernet	00:11:22:b4:b2:fb;
+	fixed-address		192.168.100.27;
+}
+
+host 404-8
+{
+	hardware ethernet	00:11:22:b2:b3:e6;
+	fixed-address		192.168.100.28;
+}
+
+host 404-9
+{
+	hardware ethernet	00:11:22:be:b5:59;
+	fixed-address		192.168.100.29;
+}
+
+host 404-10
+{
+	hardware ethernet	00:11:22:dc:52:77;
+	fixed-address		192.168.100.30;
+}
+
+host 404-11
+{
+	hardware ethernet	00:11:22:bc:b8:11;
+	fixed-address		192.168.100.31;
+}
+
+host 404-12
+{
+	hardware ethernet	00:11:22:b5:e9:4d;
+	fixed-address		192.168.100.32;
+}
