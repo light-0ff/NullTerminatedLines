@@ -32,6 +32,7 @@ void main()
 		std::cout << words[i] << std::endl;
 	}
 	std::cout << std::endl;
+	//std::cout << "?????????????" << words[1][0] << std::endl; // двумерный массив
 	for (int i = 0; i < sizeof(words) / sizeof(const char*); i++)
 	{
 		for (int j = i + 1; j < sizeof(words) / sizeof(const char*); j++)
