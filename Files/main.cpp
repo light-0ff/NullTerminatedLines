@@ -10,6 +10,7 @@
 //#define switchs
 //#define create
 //#define domashka
+#define mac_proverka
 
 void main()
 {
@@ -56,13 +57,14 @@ void main()
 	if (!strstr(source_name, ".txt"))strcat(source_name, ".txt"); // дл€ работы с тхт файлами
 	fin.open(source_name);
 
-	char mac_buffer[n] = {};
-	char ip_buffer[n] = {};
-
 	char filename[n]{}; //новый документ дл€ переноса
 	std::cout << "¬ведите название: "; std::cin.getline(filename, n);
 	std::ofstream fout; 
 	if (!strstr(filename, ".txt"))strcat(filename, ".txt"); //проверка на разширение .txt
+
+	char mac_buffer[n] = {};
+	char ip_buffer[n] = {};
+
 	fout.open(filename);// сюда записываем
 	while (!fin.eof()) 
 	{
@@ -74,7 +76,7 @@ void main()
 	fin.close();
 
 	fout.close(); 
-	char notepad[] = "notepad ";
+	char notepad[n] = "notepad ";
 	strcat(notepad, filename);
 	system(notepad);
 	//system("notepad list.txt");
@@ -138,26 +140,38 @@ void main()
 	strcat(notepad, filename);
 	system(notepad);
 #endif // domashka
-	const int n = 256;
-	char source_file[n]{};
-	char dest_file[n]{};
-	std::cout << "¬ведите им€ соуса: "; std::cin >> source_file;
-	std::cout << "¬ведите им€ конечного файла: "; std::cin >> dest_file;
-	if (!strstr(source_file, ".txt"))strcat(source_file, ".txt"); 
-	if (!strstr(dest_file, ".txt"))strcat(dest_file, ".txt"); 
+#ifdef mac_proverka
 
-	std::ifstream fin(source_file);
-	std::ofstream fout(dest_file);
+	const int n = 256;
+
+	std::ifstream fin;
+	std::ofstream fout;
+
+	char source_file[n]{}; /*соус*/					
+	std::cout << "¬ведите им€ соуса: "; std::cin.getline(source_file, n);
+	if (!strstr(source_file, ".txt"))strcat(source_file, ".txt"); 
+	fin.open(source_file);
+	
+	char dest_file[n]{};   /*куда копировать*/		
+	std::cout << "¬ведите им€ конечного файла: "; std::cin.getline(dest_file, n);
+	if (!strstr(dest_file, ".txt"))strcat(dest_file, ".txt"); 
+	
+
+	/*std::ifstream fin(source_file);
+	std::ofstream fout(dest_file);*/
 
 	char mac_buffer[n]{};
 	char ip_buffer[n]{};
-		
+////////////////////////////////////
+
+///////////////////////////////////
+	fout.open(dest_file);
 	for (int i=1; !fin.eof();i++)
 	{
 		fin >> mac_buffer;
 		fin >> ip_buffer;
 		fout << "host-" << i << std::endl;
-		fout<<"{\n";
+		fout << "{\n";
 		fout << "\thehardware-ethernet\t" << mac_buffer << ";\n";
 		fout << "\tfixed-address\t" << ip_buffer << ";\n";
 		fout << "}\n";
@@ -173,5 +187,6 @@ void main()
 	fout.close();
 	char command[n] = "system ";
 	strcat(command, dest_file);
+#endif // mac_proverka
 
 }
