@@ -163,7 +163,24 @@ void main()
 	char mac_buffer[n]{};
 	char ip_buffer[n]{};
 ////////////////////////////////////
-
+	for (int i = 0; !fin.eof(); i++)		//можно было добавить булевую перем
+	{
+		fin >> mac_buffer;
+		
+		for (int j = 0; mac_buffer[j]; j++)
+		{
+			if (mac_buffer[j] == '.') 
+			{
+				std::cout << "this is IP: " << mac_buffer << std::endl;
+				break;
+			}
+			if (mac_buffer[j] == ':')
+			{
+				std::cout << "this is MAC: " << mac_buffer << std::endl;
+				break;
+			}
+		}
+	}
 ///////////////////////////////////
 	fout.open(dest_file);
 	for (int i=1; !fin.eof();i++)
